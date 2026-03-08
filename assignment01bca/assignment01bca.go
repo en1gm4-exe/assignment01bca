@@ -41,9 +41,9 @@ func NewBlock(transaction string, nonce int, previousHash string) *block {
 }
 
 func ListBlocks() {
-	fmt.Println("=================================================================")
+	fmt.Println(strings.Repeat("=", 65))
 	fmt.Println("                        BLOCKCHAIN                              ")
-	fmt.Println("=================================================================")
+	fmt.Println(strings.Repeat("=", 65))
 	for _, b := range Blockchain {
 		fmt.Printf("Index        : %d\n", b.Index)
 		fmt.Printf("Transaction  : %s\n", b.Transaction)
@@ -51,7 +51,7 @@ func ListBlocks() {
 		fmt.Printf("Timestamp    : %s\n", b.Timestamp)
 		fmt.Printf("PreviousHash : %s\n", b.PreviousHash)
 		fmt.Printf("CurrentHash  : %s\n", b.CurrentHash)
-		fmt.Println("-----------------------------------------------------------------")
+		fmt.Println(strings.Repeat("_", 65))
 	}
 }
 
@@ -65,9 +65,9 @@ func ChangeBlock(index int, newTransaction string) {
 }
 
 func VerifyChain() bool {
-	fmt.Println("=================================================================")
+	fmt.Println(strings.Repeat("=", 65))
 	fmt.Println("                     VERIFYING BLOCKCHAIN                       ")
-	fmt.Println("=================================================================")
+	fmt.Println(strings.Repeat("=", 65))
 	valid := true
 	for i, b := range Blockchain {
 		hashInput := b.Transaction + strconv.Itoa(b.Nonce) + b.PreviousHash + strconv.Itoa(b.Index) + b.Timestamp
@@ -87,12 +87,13 @@ func VerifyChain() bool {
 			}
 		}
 	}
-	fmt.Println("-----------------------------------------------------------------")
+	fmt.Println(strings.Repeat("_", 65))
 	if valid {
 		fmt.Println("RESULT: Blockchain is VALID and INTACT.")
 	} else {
 		fmt.Println("RESULT: Blockchain INTEGRITY COMPROMISED. Tampering detected!")
 	}
-	fmt.Println("=================================================================")
+	fmt.Println(strings.Repeat("=", 65))
 	return valid
+
 }
