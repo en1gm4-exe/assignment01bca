@@ -1,15 +1,32 @@
 # Creating-a-simple-Blockchain
-Building a simplified Blockchain in Go — basically a linked list of blocks where each block stores a transaction, and is cryptographically linked to the previous one via SHA-256 hashes. If anyone tampers with a block's data, the hash breaks and our `VerifyChain()` function catches it.
+This project implements a simplified blockchain in Go, as part of a Blockchain course assignment. It demonstrates the core concepts of a blockchain: blocks linked via cryptographic hashes, immutability, tamper detection, and chain verification.
+
+The blockchain is essentially a linked list where each block contains:
+- A transaction string
+- A nonce (arbitrary integer)
+- The hash of the previous block
+- Its own hash (SHA‑256 of `transaction + nonce + previousHash + index + timestamp`)
+- Index (position in the chain)
+- Timestamp
+
+If any block’s data is altered, its hash changes, breaking the link to the next block. The `VerifyChain()` function detects such tampering.
 
 
-    go mod init assignment01
+## Setup
 
-    cd assignment01bca
-    go mod init github.com/en1gm4-exe/assignment01bca
-    cd ..
+### 1. Initialise Go modules
 
-    go mod edit -replace github.com/en1gm4-exe/assignment01bca=./assignment01bca
+        go mod init assignment01
+        cd assignment01bca
+        go mod init github.com/en1gm4-exe/assignment01bca
+        cd ..
 
-    go mod tidy
+### 2. Set up the local replace directive (so the main program can find the package):
+        go mod edit -replace github.com/en1gm4-exe/assignment01bca=./assignment01bca
 
-    go run main.go
+
+### 3. Tidy up the modules:
+        go mod tidy
+
+### 4. Execution
+        go run main.go
